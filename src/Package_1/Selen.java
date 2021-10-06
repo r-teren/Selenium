@@ -20,6 +20,11 @@ public class Selen {
         chromedriver.manage().window().maximize();
         chromedriver.navigate().to("http://www.google.com");
 
+        //Validate title
+        String title = chromedriver.getTitle();
+        String titleExp = "Google";
+        Assert.assertEquals(title, titleExp);
+
         //create elements for google search
         WebElement searchField = chromedriver.findElement(By.name("q"));
         WebElement searchBut = chromedriver.findElement(By.name("btnK"));
@@ -43,22 +48,17 @@ public class Selen {
                 ).equals("complete");
             }
         });
-       // Assert.
 
 
         List<WebElement> selCount = chromedriver.findElements(By.xpath("//*[contains (text(),'Selenium')]"));
 
-        String title = chromedriver.getTitle();
-        String titleExp = "Selenium - Пошук Google";
-        Assert.assertEquals(title, titleExp);
-        String result = ("The amount of webElements which contains text 'Selenium' at page " + "'" + title + "'" +" is " + selCount.size());
+        String titleR= chromedriver.getTitle();
+
+        String result = ("The amount of webElements which contains text 'Selenium' at page " + "'" + titleR + "'" +" is " + selCount.size());
 
 
         chromedriver.quit();
 
         System.out.println(result);
-
-
-
     }
 }
